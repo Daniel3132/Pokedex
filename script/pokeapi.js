@@ -10,14 +10,12 @@ const getPokes  = async (url, inicio, busqueda)=>{
         try{
             const res  = await fetch(url+i)
             const data = await res.json()
-            /* console.log(data.name); */
             pokeArray.push(data)
         }catch (error){
             return console.log(error);
         }
                 
     }
-    console.log(pokeArray); 
     showPokes(pokeArray);
     if(pokeArray.length == 0){
         swal.fire({
@@ -48,9 +46,9 @@ const showPokes = (Pokes) =>{
                 <h5 style=color:orange>Moves</h5>
                 <lu>
                     <li>${moves[0].move.name}</li>
-                    <li>${moves[1].move.name}</li>
-                    <li>${moves[2].move.name}</li>
-                    <li>${moves[3].move.name}</li>
+                    <li>${moves[1]?.move.name}</li>
+                    <li>${moves[2]?.move.name}</li>
+                    <li>${moves[3]?.move.name}</li>
                 </lu>
                 <h5 style=color:orange>Base exp.</h5>
                 <lu>
@@ -69,7 +67,6 @@ const showPokes = (Pokes) =>{
         `
         main.appendChild(PokeDiv)
     });
-    console.log(Pokes);
 }
 
 form.addEventListener('submit', e => {
@@ -93,7 +90,6 @@ form.addEventListener('submit', e => {
         try{
             const res = await fetch(API_URL+ searchTerm)
             buscado = [await res.json()]
-            console.log(buscado);
             showPokes(buscado)
         }catch (error){
             console.log(error);
